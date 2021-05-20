@@ -29,6 +29,7 @@ for (i = 0; i < urlsToGet.length; i++) {
 		http.get(urlsToGet[index], function(response) {
 			response.pipe(bufferList(function(err, data) {
 				if (err) {
+					
 					return console.error(err);
 				}
 				dataOrdered[index] = data.toString();
