@@ -5,7 +5,6 @@ if (process.argv[2] !== undefined) {
 	urlToGet = process.argv[2];
 }
 
-
 http.get(urlToGet, function(response) {
 
 	// console.log("Response Status description : " + http.STATUS_CODES[response.statusCode]);
