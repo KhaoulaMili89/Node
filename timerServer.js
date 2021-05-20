@@ -29,7 +29,6 @@ var server = net.createServer(function(socket) {
 
 	// socket.write(dateToReturn);
 	// console.log(dateToReturn);
-
 	socket.end(dateToReturn + "\n");
 });
 
