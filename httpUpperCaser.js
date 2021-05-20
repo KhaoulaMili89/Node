@@ -1,32 +1,33 @@
-var  http  =  require ( "http" ) ;
-var  map  =  require ( "through2-map" ) ;
+// Required modules
+var http = require("http");
+var map = require("through2-map");
 
-// Arguments de l'utilisateur ou valeurs par défaut
-var  demandéPort  =  8080 ;
-if  ( processus . argv [ 2 ]  !==  null )  {
-	requestedPort  =  parseInt ( processus . argv [ 2 ] ,  10 ) ;
+// User Arguments or defaults values
+var requestedPort = 8080;
+if (process.argv[2] !== undefined) {
+	requestedPort = parseInt(process.argv[2], 10);
 }
 
-// Créer un serveur http
- serveur  var =  http . createServer ( fonction ( req ,  res )  {
+// Create http server
+var server = http.createServer(function(req, res) {
 
-	// Vérifie si la méthode POST
-	if  ( req . method  !=  "POST" )  {
-		res . end ( "Méthode POST demandée!" ) ;
-		retour ;
+	// Check if POST method
+	if (req.method != "POST") {
+		res.end("POST method requested!");
+		return;
 	}
 
-	// Créer une carte pour transformer les personnages
-	var  upperCaseMap  =  map ( fonction ( bloc )  {
-		 morceau de retour . toString ( ) . toUpperCase ( ) ;
-	} ) ;
+	// Create map to transform characters
+	var upperCaseMap = map(function(chunk) {
+		return chunk.toString().toUpperCase();
+	});
 
-	// Utiliser la carte
-	var  valueToReturn  =  req . pipe ( upperCaseMap ) ;
+	// Use the map
+	var valueToReturn = req.pipe(upperCaseMap);
 
-	// Transmet le résultat à l'objet de réponse
-	valueToReturn . tuyau ( res ) ;
+	// Pipes the result to the response object
+	valueToReturn.pipe(res);
 
-} ) ;
+});
 
-serveur . écouter ( requiredPort ) ;
+server.listen(requestedPort);
