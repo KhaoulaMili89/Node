@@ -1,20 +1,21 @@
-var  http  =  require ( "http" ) ;
-var  concatStream  =  require ( 'concat-stream' )
+var http = require("http");
+var concatStream = require('concat-stream')
 
-var  urlToGet  =  "http://faubourgsimone.paris/" ;
-if  ( processus . argv [ 2 ]  !==  null )  {
-	urlToGet  =  processus . argv [ 2 ] ;
+var urlToGet = "http://faubourgsimone.paris/";
+if (process.argv[2] !== undefined) {
+	urlToGet = process.argv[2];
 }
 
-http . get ( urlToGet ,  fonction ( réponse )  {
+http.get(urlToGet, function(response) {
 
-	réponse . pipe ( concatStream ( fonction ( données )  {
-		var  nbChars  =  données . toString ( ) . longueur ;
-		console . log ( nbChars ) ;
-		console . log ( données . toString ( ) ) ;
-	} ) )
+	response.pipe(concatStream(function(data) {
+		var nbChars = data.toString().length;
+		console.log(nbChars);
+		console.log(data.toString());
+	}))
 
 
-} ) . on ( 'erreur' ,  fonction ( e )  {
-	console . error ( "Got error:"  +  e . message ) ;
-} ) ;
+}).on('error', function(e) {
+	console.error("Got error: " + e.message);
+});
+© 2021 GitHub, Inc.
