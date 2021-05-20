@@ -1,6 +1,6 @@
-var  somme  =  0 ;
-var  nbArgs  =  processus . argv . longueur ;
-for  ( i = 2 ;  i < nbArgs ;  i ++ )  {
-	somme  +=  nombre ( process . argv [ i ] ) ;
+var sum = 0;
+var nbArgs = process.argv.length;
+for (i=2; i<nbArgs; i++) {
+	sum += Number(process.argv[i]);
 }
-console . log ( somme ) ;
+console.log(sum);
