@@ -1,25 +1,29 @@
-var  fs  =  require ( "fs" ) ;
-var  chemin  =  require ( "chemin" ) ;
-var  dirWanted  =  "." ;
-if  (  processus .argv[2]  !==  null )  {
-	dirWanted  =  processus . argv [ 2 ] ;
+var fs = require("fs");
+var path = require("path");
+var dirWanted = ".";
+if (process.argv[2] !== undefined) {
+	dirWanted = process.argv[2];
 }
-var  extWanted  =  "*" ;
-if  ( processus.argv[3]  !==  null )  {
-	extWanted  =  processus . argv [ 3 ] ;
+
+var extWanted = "*";
+if (process.argv[3] !== undefined) {
+	extWanted = process.argv[3];
 }
-fs . readdir ( dirWanted ,  fonction ( err ,  liste )  ;
-	if  ( err )  {
-		console . log ( err ) 
+
+
+fs.readdir(dirWanted, function(err, list) {
+	if (err) {
+		console.log(err);
 	}
-	else  {
-		liste . forEach ( fonction ( élément ,  index )  ;
-			if  ( extWanted ===  "*" )  {
-				console . log ( élément . toString ( ) ) ;
+	else {
+		list.forEach(function(item, index) {
+			if (extWanted === "*") {
+				console.log(item.toString());
 			}
-			else  if  ( chemin . nomext ( élément )  ===  "."  +  extWanted )  {
-				console . journal ( élément ) ;
+			else if (path.extname(item) === "." + extWanted) {
+				console.log(item);
 			}
-		 
+		});
 	}
+});
  
