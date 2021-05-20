@@ -10,5 +10,6 @@ try {
 	console.log(nbLines);
 }
 catch (e) {
+	
 	console.log(e);
 }
