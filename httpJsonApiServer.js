@@ -1,71 +1,72 @@
-var  http  =  require ( "http" ) ;
-var  urlMod  =  require ( "url" ) ;
+// Required modules
+var http = require("http");
+var urlMod = require("url");
 
 
-// Arguments de l'utilisateur ou valeurs par défaut
-var  demandéPort  =  8080 ;
-if  ( processus . argv [ 2 ]  !==  null )  {
-	requestedPort  =  parseInt ( processus . argv [ 2 ] ,  10 ) ;
+// User Arguments or defaults values
+var requestedPort = 8080;
+if (process.argv[2] !== undefined) {
+	requestedPort = parseInt(process.argv[2], 10);
 }
 
-// Créer un serveur http
- serveur  var =  http . createServer ( fonction ( req ,  res )  {
+// Create http server
+var server = http.createServer(function(req, res) {
 
-	// Contrôle pour favicon
-	if  ( req . url  ===  '/favicon.ico' )  {
-		res . writeHead ( 200 ,  {
-			'Content-Type' : 'image / x-icon'
-		} ) ;
-		res . fin ( ) ;
-		retour ;
+	// Control for favicon
+	if (req.url === '/favicon.ico') {
+		res.writeHead(200, {
+			'Content-Type': 'image/x-icon'
+		});
+		res.end();
+		return;
 	}
 
 
-	// Récupère le chemin (routes)
-	var  urlStr  =  req . url ;
-	var  urlObj  =  urlMod . parse ( req . url ,  true ) ;
-	var  chemin d'accès  =  urlObj . chemin . toLowerCase ( ) ;
+	// Get pathname (routes)
+	var urlStr = req.url;
+	var urlObj = urlMod.parse(req.url, true);
+	var pathname = urlObj.pathname.toLowerCase();
 
 
-	// Récupère la requête (variables dans l'url)
-	var  query  =  urlObj . requête ;
-	var  iso  =  requête . iso ;
+	// Get query (variables in url)
+	var query = urlObj.query;
+	var iso = query.iso;
 
-	// Définir le type de contenu pour la réponse JSON
-	res . writeHead ( 200 ,  {
-		'Content-Type' : 'application / json'
-	} ) ;
+	// Define content type for JSON response
+	res.writeHead(200, {
+		'Content-Type': 'application/json'
+	});
 
-	// Créer un objet Date
-	var  date  =  nouvelle  date ( iso ) ;
+	// Create Date object
+	var date = new Date(iso);
 
-	// L'objet dépend de l'itinéraire
-	var  dataObj  =  null ;
-	if  ( chemin d'accès  ===  "/ api / parsetime" )  {
-		dataObj  =  {
-			"heure" : date . getHours ( ) ,
-			"minute" : date . getMinutes ( ) ,
-			"second" : date . getSeconds ( )
-		} ;
+	// Object depends on route
+	var dataObj = null;
+	if (pathname === "/api/parsetime") {
+		dataObj = {
+			"hour": date.getHours(),
+			"minute": date.getMinutes(),
+			"second": date.getSeconds()
+		};
 	}
-	else  if  ( chemin d'accès  ===  "/ api / unixtime" )  {
-		dataObj  =  {
-			"unixtime" : date . getTime ( )
-		} ;
+	else if (pathname === "/api/unixtime") {
+		dataObj = {
+			"unixtime": date.getTime()
+		};
 	}
-	else  {
-		res . write ( "Pas de données ici!" ) ;
+	else {
+		res.write("No data here!");
 	}
 
 	// JSON
-	if  ( dataObj  ! ==  null )  {
-		var  dataToSend  =  JSON . stringify ( dataObj ) ;
-		res . écrire ( dataToSend ) ;
+	if (dataObj !== null) {
+		var dataToSend = JSON.stringify(dataObj);
+		res.write(dataToSend);
 	}
 
-	// Fermer
-	res . fin ( ) ;
+	// Close
+	res.end();
 
-} ) ;
+});
 
-serveur . écouter ( requiredPort ) ;
+server.listen(requestedPort);
