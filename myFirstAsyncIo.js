@@ -10,4 +10,5 @@ fs.readFile(fileName, 'utf8', function (err, data) {
 		var nbLines = data.toString().split('\n').length -1 ;
 		console.log(nbLines);
 	}
+	
 });
