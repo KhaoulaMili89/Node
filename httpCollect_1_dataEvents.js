@@ -1,34 +1,34 @@
-var  http  =  require ( "http" ) ;
+var http = require("http");
 
-var  urlToGet  =  "http://faubourgsimone.paris/" ;
-if  ( processus . argv [2]  !==  null )  {
-	urlToGet  =  processus . argv [ 2 ] ;
+var urlToGet = "http://faubourgsimone.paris/";
+if (process.argv[2] !== undefined) {
+	urlToGet = process.argv[2];
 }
 
 
-if (http . get ( urlToGet ,  fonction ( réponse ))  {
+http.get(urlToGet, function(response) {
 
-	// console.log ("Description de l'état de la réponse:" + http.STATUS_CODES [response.statusCode]);
+	// console.log("Response Status description : " + http.STATUS_CODES[response.statusCode]);
 
-	réponse.setEncoding ( "utf8" ) ;
+	response.setEncoding("utf8");
 
-	var  outPut  =  "" ;
+	var outPut = "";
 
-	réponse . on ( "données" ,  fonction ( données )  {
-		// console.log (données.toString ());
-		outPut  = outPut + données 
-	} ) ;
+	response.on("data", function(data) {
+		// console.log(data.toString());
+		outPut += data;
+	});
 
-	réponse . on ( "fin" ,  function ( )  {
-		var  nbChars  =  outPut . toString ( ) . longueur ;
-		console . log ( nbChars ) ;
-		console . log ( outPut ) ;
-	} ) ;
+	response.on("end", function() {
+		var nbChars = outPut.toString().length;
+		console.log(nbChars);
+		console.log(outPut);
+	});
 
-	réponse . on ( "erreur" ,  fonction ( données )  {
-		Console.erreur ( data . toString ( ) ) ;
-	} ) ;
+	response.on("error", function(data) {
+		console.error(data.toString());
+	});
 
-} ) . on ( 'erreur' ,  fonction ( e )  {
-	console . error ( "Got error:"  +  e . message ) ;
-} ) ;
+}).on('error', function(e) {
+	console.error("Got error: " + e.message);
+});
