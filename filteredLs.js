@@ -10,7 +10,6 @@ if (process.argv[3] !== undefined) {
 	extWanted = process.argv[3];
 }
 
-
 fs.readdir(dirWanted, function(err, list) {
 	if (err) {
 		console.log(err);
