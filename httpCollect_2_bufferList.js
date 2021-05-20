@@ -5,7 +5,6 @@ var urlToGet = "http://faubourgsimone.paris/";
 if (process.argv[2] !== undefined) {
 	urlToGet = process.argv[2];
 }
-
 http.get(urlToGet, function(response) {
 
 	response.pipe(bufferList(function(err, data) {
