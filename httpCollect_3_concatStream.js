@@ -14,7 +14,6 @@ http.get(urlToGet, function(response) {
 		console.log(data.toString());
 	}))
 
-
 }).on('error', function(e) {
 	console.error("Got error: " + e.message);
 });
