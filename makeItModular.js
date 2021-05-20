@@ -1,19 +1,20 @@
-var  mymodulelist  =  require ( './mymodule.js' ) ;
+var mymodulelist = require('./mymodule.js');
 
-var  dirWanted  =  "." ;
-if  ( processus . argv [2]  !==  null )  {
-	dirWanted  =  processus . argv [ 2 ] ;
+var dirWanted = ".";
+if (process.argv[2] !== undefined) {
+	dirWanted = process.argv[2];
 }
 
-var  extWanted  =  "*" ;
-if  ( processus . argv [ 3 ]  !==  null )  {
-	extWanted  =  processus . argv [ 3 ] ;
+var extWanted = "*";
+if (process.argv[3] !== undefined) {
+	extWanted = process.argv[3];
 }
 
-mymodulelist ( dirWanted ,  extWanted ,  function ( err ,  list )  {
-	if  ( err )  {
-		Console.log ( err ) ;
+mymodulelist(dirWanted, extWanted, function(err, list) {
+	if (err) {
+		return console.log(err);
 	}
-	liste . forEach ( fonction ( fichier ), 
-
-		Console.log ( fichier ) )})
+	list.forEach(function(file) {
+		console.log(file);
+	})
+});
