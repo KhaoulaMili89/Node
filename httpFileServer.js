@@ -1,37 +1,38 @@
-var  http  =  require ( "http" ) ;
-var  fs  =  require ( "fs" ) ;
+// Required modules
+var http = require("http");
+var fs = require("fs");
 
 
-// Arguments de l'utilisateur ou valeurs par défaut
-var  demandéPort  =  8080 ;
-if  ( processus . argv [ 2 ]  !==  null )  {
-	requestedPort  =  parseInt ( processus . argv [ 2 ] ,  10 ) ;
+// User Arguments or defaults values
+var requestedPort = 8080;
+if (process.argv[2] !== undefined) {
+	requestedPort = parseInt(process.argv[2], 10);
 }
-var  fileLocation  =  "allo.txt" ;
-if  ( processus . argv [ 3 ]  !==  null )  {
-	fileLocation  =  processus . argv [ 3 ] ;
+var fileLocation = "allo.txt";
+if (process.argv[3] !== undefined) {
+	fileLocation = process.argv[3];
 }
 
-// Créer un serveur http
- serveur  var =  http . createServer ( fonction ( req ,  res )  {
+// Create http server
+var server = http.createServer(function(req, res) {
 
-	// Ouvre le fichier en tant que flux lisible
-	var  readStream  =  fs . createReadStream ( fileLocation ) ;
+	// Opens the file as a readable stream
+	var readStream = fs.createReadStream(fileLocation);
 
-	// Le flux est valide pour la tuyauterie
-	readStream . on ( "open" ,  function ( )  {
+	// The stream is valid to piping
+	readStream.on("open", function() {
 
-		// res.writeHead (200, {'content-type': 'text / plain'})
+		// res.writeHead(200, { 'content-type': 'text/plain' })
 
-		// Pipes le flux de lecture vers l'objet de réponse (qui va au client)
-		readStream . tuyau ( res ) ;
-	} ) ;
+		// Pipes the read stream to the response object (which goes to the client)
+		readStream.pipe(res);
+	});
 
-	// Attrape toutes les erreurs lors de la création du flux
-	readStream . on ( "erreur" ,  fonction ( err )  {
-		res . end ( err . toString ( ) ) ;
-	} ) ;
-} ) ;
+	// Catches any errors while creating the stream
+	readStream.on("error", function(err) {
+		res.end(err.toString());
+	});
+});
 
-// Commence à écouter
-serveur . écouter ( requiredPort ) ;
+// Start listening
+server.listen(requestedPort);
