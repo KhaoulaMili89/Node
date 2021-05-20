@@ -30,7 +30,6 @@ function getData(index) {
 		console.error("Got error: " + e.message);
 	});
 }
-
 // params
 if (process.argv[2] === undefined) {
 	// urls par défaut si pas de paramètres
