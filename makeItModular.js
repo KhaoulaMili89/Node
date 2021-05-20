@@ -17,4 +17,5 @@ mymodulelist(dirWanted, extWanted, function(err, list) {
 	list.forEach(function(file) {
 		console.log(file);
 	})
+	
 });
