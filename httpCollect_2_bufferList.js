@@ -1,23 +1,23 @@
-var  http  =  require ( "http" ) ;
-var  bufferList  =  require ( "bl" ) ;
+var http = require("http");
+var bufferList = require("bl");
 
-var  urlToGet  =  "http://faubourgsimone.paris/" ;
-if  ( processus . argv [ 2 ]  !==  null )  {
-	urlToGet  =  processus . argv [ 2 ] ;
+var urlToGet = "http://faubourgsimone.paris/";
+if (process.argv[2] !== undefined) {
+	urlToGet = process.argv[2];
 }
 
-http . get ( urlToGet ,  fonction ( réponse )  {
+http.get(urlToGet, function(response) {
 
-	réponse . pipe ( bufferList ( fonction ( err ,  données )  {
-		if  ( err )  {
-			console . erreur ( err ) ;
-		};
-		// `data` est un objet Buffer complet contenant les données complètes
-		var  nbChars  =  données . toString ( ) . longueur ;
-		console . log ( nbChars ) ;
-		console . log ( données . toString ( ) ) ;
-	} ) )
+	response.pipe(bufferList(function(err, data) {
+		if (err) {
+			return console.error(err);
+		}
+		// `data` is a complete Buffer object containing the full data
+		var nbChars = data.toString().length;
+		console.log(nbChars);
+		console.log(data.toString());
+	}))
 
-} ) . on ( 'erreur' ,  fonction ( e )  {
-	console . error ( "Got error:"  +  e . message ) ;
-} ) ;
+}).on('error', function(e) {
+	console.error("Got error: " + e.message);
+});
